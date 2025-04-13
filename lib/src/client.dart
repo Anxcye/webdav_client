@@ -63,6 +63,7 @@ class Client {
   /// Read all files in a folder
   Future<List<File>> readDir(String path, [CancelToken? cancelToken]) async {
     path = fixSlashes(path);
+    path = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
     var resp = await this
         .c
         .wdPropfind(this, path, true, fileXmlStr, cancelToken: cancelToken);
